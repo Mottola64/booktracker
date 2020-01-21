@@ -13,15 +13,24 @@ class Books {
         this.newBookGenre = document.getElementById('new-book-genre')
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
-    
     }
 
     createBook(e) {
         console.log(this)
         e.preventDefault()
-        const bookTitle = this.newBookTitle.value
+        const book = {
+            title: this.newBookTitle.value,
+            author: this.newBookAuthor.value,
+            genre: this.newBookGenre.value
+        }
 
-        this.adapter.createBook(bookTitle)
+
+        this.adapter.createBook(book)
+            .then(book => {
+            this.books.push(new Book(book))
+            this.render()
+            })
+            .catch(err => console.log(err))
 
     }
     fetchAndLoadBooks() {
