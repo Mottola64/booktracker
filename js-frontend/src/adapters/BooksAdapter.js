@@ -12,7 +12,6 @@ class BooksAdapter {
         const book = {
             title: bookTitle,
         }
-        debugger
         return fetch(this.baseUrl, {
             method: 'POST',
             headers: {
