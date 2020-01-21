@@ -8,11 +8,8 @@ class Books {
 
     initBindingsAndEventListeners() {
         this.booksContainer = document.getElementById('books-container')
-        this.title = document.querySelector('form')
         this.newBookTitle = document.getElementById('new-book-title')
-        this.author = document.querySelector('author')
         this.newBookAuthor = document.getElementById('new-book-author')
-        this.genre = document.querySelector('genre')
         this.newBookGenre = document.getElementById('new-book-genre')
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
