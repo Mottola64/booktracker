@@ -11,16 +11,21 @@
         <h1>Booktracker</h1>
         <div id="new-book-container">
             <form id="new-book-form">
-                <input type="text"/>
-                <input type="submit"/>
+                Title: <input type="text" name="book-title" id="new-book-title"/><br>
+                Author:<input type="text" name="book-author" id="new-book-author"/><br>
+                Genre: <input type="text" name="book-genre" id="new-book-genre"/><br>
+                <input type="submit" value="Submit"/>
             </form>
         </div>
-    <div id="books-container">
+    <div id="books-content">
+        <ul id="books-container">
 
+        </ul>
     </div>
 
     </div>
 
+    <script src="src/components/book.js"></script>
     <script src="src/components/books.js"></script>
     <script src="src/components/app.js"></script>
     <script src="src/adapters/BooksAdapter.js"></script>

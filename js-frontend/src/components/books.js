@@ -2,10 +2,31 @@ class Books {
     constructor() {
         this.books = []
         this.adapter = new BooksAdapter()
-        // this.bindEventListeners()
+        this.initBindingsAndEventListeners()
         this.fetchAndLoadBooks()
     }
 
+    initBindingsAndEventListeners() {
+        this.booksContainer = document.getElementById('books-container')
+        this.title = document.querySelector('title')
+        this.newBookTitle = document.getElementById('new-book-title')
+        this.author = document.querySelector('author')
+        this.newBookAuthor = document.getElementById('new-book-author')
+        this.genre = document.querySelector('genre')
+        this.newBookGenre = document.getElementById('new-book-genre')
+        this.bookForm = document.getElementById('new-book-form')
+        this.bookForm.addEventListener('submit', this.createBook.bind(this))
+    
+    }
+
+    createBook(e) {
+        console.log(this)
+        e.preventDefault()
+        const bookTitle = this.newBookTitle.value
+
+        this.adapter.createBook(bookTitle)
+
+    }
     fetchAndLoadBooks() {
         this.adapter
             .getBooks()
@@ -18,8 +39,7 @@ class Books {
         }) 
     }
 
-    render() {
-        const booksContainer = document.getElementById('books-container')
-        booksContainer.innerHTML = 'books here'
+    render() {        
+        this.booksContainer.innerHTML = this.books.map(book =>book.renderLi()).join('')
     }
 }

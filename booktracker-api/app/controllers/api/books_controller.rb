@@ -14,7 +14,7 @@ class Api::BooksController < ApplicationController
         render json: @book, status: 200
     end    
 
-    def create
+    def create        
         @book = Book.create(book_params)
 
         render json: @book, status: 200
@@ -37,7 +37,7 @@ class Api::BooksController < ApplicationController
 
     private
         def book_params
-            params.require(:book).permit(:title, :author, :genre)
+            params.require(:book).permit!
         end
 
 

@@ -7,8 +7,19 @@ class BooksAdapter {
         return fetch(this.baseUrl).then(res => res.json()
         )
     }
+
+    createBook(bookTitle) {
+        const book = {
+            title: bookTitle,
+        }
+        debugger
+        return fetch(this.baseUrl, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            title: JSON.stringify({ book })
+        })
+    }
 }
 
-adapter = new BooksAdapter()
-
-const books = adapter.getBooks()
