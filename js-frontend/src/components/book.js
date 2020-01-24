@@ -7,6 +7,8 @@ class Book {
     }
 
     renderLi() {
-        return `<li>${this.title} - ${this.author} - ${this.genre} </li>`
+        return `<li><b>${this.title}</b></li>
+                    <ul>${this.author}</ul>
+                    <ul>${this.genre} </ul>`
     }
 }
