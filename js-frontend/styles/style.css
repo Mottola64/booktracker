@@ -38,3 +38,13 @@ body {
     grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
   }
+
+  #modal{
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+      align-items: center;
+      display: none;
+  }

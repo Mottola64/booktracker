@@ -35,9 +35,9 @@ class Reviews {
     fetchAndLoadReviews() {
         this.adapter
             .getReviews()
-            .then(Reviews => {
-                Reviews.forEach(book => this.Reviews.push(new Book(book)))
-                console.log(this.Reviews)
+            .then(reviews => {
+                reviews.forEach(book => this.reviews.push(new Review(book)))
+                console.log(this.reviews)
         })
         .then(() => {
             this.render()
@@ -45,6 +45,6 @@ class Reviews {
     }
 
     render() {        
-        this.ReviewsContainer.innerHTML = this.Reviews.map(book =>book.renderLi()).join('')
+        this.reviewsContainer.innerHTML = this.reviews.map(book =>book.renderLi()).join('')
     }
 }
