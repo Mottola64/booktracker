@@ -7,24 +7,22 @@ class Reviews {
     }
 
     initBindingsAndEventListeners() {
-        this.reviewsContainer = document.getElementById('reviews-container')
-        this.bookForm = document.getElementById('new-book-form')
-        this.bookForm.addEventListener('submit', this.createBook.bind(this))
+
     }
 
-    createBook(e) {
+    createReview(e) {
         console.log(this)
         e.preventDefault()
-        const book = {
-            title: this.newBookTitle.value,
-            author: this.newBookAuthor.value,
-            genre: this.newBookGenre.value
+        const review = {
+            content: this.newReviewContent.value,
+            reviewer: this.newReviewer.value,
+
         }
 
 
-        this.adapter.createBook(book)
-            .then(book => {
-            this.Reviews.push(new Book(book))
+        this.adapter.createReview(review)
+            .then(review => {
+            this.reviews.push(new Review(review))
             
             this.render()
             })
@@ -45,6 +43,6 @@ class Reviews {
     }
 
     render() {        
-        this.reviewsContainer.innerHTML = this.reviews.map(book =>book.renderLi()).join('')
+        this.reviewsContainer.innerHTML = this.reviews.map(review =>review.renderLi()).join('')
     }
 }

@@ -10,4 +10,8 @@ class Review {
         return `<li>${this.content}</li>
                     <ul>${this.reviewer}</ul>`
     }
+
+    renderNewReviewForm() {
+        
+    }
 }

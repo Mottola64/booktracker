@@ -8,7 +8,10 @@
 
 
 Book.create([
-    {title: '1776', author: 'David McCullough', genre: 'History'},
     {title: 'Born To Run', author: 'Bruce Springsteen', genre: 'Autobiography'},
     {title: 'Casino', author: 'Nicholas Pileggi', genre: 'Crime'},
 ])
+
+book_a = Book.create({title: '1776', author: 'David McCullough', genre: 'History'})
+
+book_a.reviews.create({content: "Great Book", reviewer: "Mike"})

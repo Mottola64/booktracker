@@ -14,8 +14,15 @@ class Books {
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
         this.booksContainer.addEventListener('dblclick', this.handleBookClick.bind(this))
+        this.booksContainer.addEventListener('click', this.handleNewReviewClick)
     }
 
+    handleNewReviewClick(e) {
+        //does the e.target have the new-review-button class name?? only respond if it does
+        // take the book id value from the button
+        // call the render Book.renderForm function and pass it the book id
+        console.log(e.target.className)
+    }
     createBook(e) {
         console.log(this)
         e.preventDefault()
@@ -52,6 +59,6 @@ class Books {
     }
 
     render() {        
-        this.booksContainer.innerHTML = this.books.map(book =>book.renderLi()).join('')
+        this.booksContainer.innerHTML = this.books.map(book =>book.renderBook()).join('')
     }
 }
