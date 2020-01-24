@@ -13,6 +13,7 @@ class Books {
         this.newBookGenre = document.getElementById('new-book-genre')
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
+        this.booksContainer.addEventListener('dblclick', this.handleBookClick.bind(this))
     }
 
     createBook(e) {
@@ -28,10 +29,15 @@ class Books {
         this.adapter.createBook(book)
             .then(book => {
             this.books.push(new Book(book))
+            
             this.render()
             })
             .catch(err => console.log(err))
 
+    }
+
+    handleBookClick(e) {
+        console.log(e.target)
     }
     fetchAndLoadBooks() {
         this.adapter
