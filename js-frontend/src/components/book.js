@@ -11,10 +11,10 @@ class Book {
         return `
             <ul>${this.reviews.map(review => {
                 return `
-                    <p>${review.content}</p>
-                    <p>${review.reviewer}</p>
+                   <p>${review.content}</p>
+                   <p>${review.reviewer}</p>
                 `
-            }).join()}
+            }).join('')}</ul>
             `
     }
 
@@ -38,7 +38,16 @@ class Book {
 
     //form submit event handler
     handFormOnSubmit(){
-        
+        console.log('testetetrserserse')
+        // return fetch(this.baseUrl, {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ review })
+        // })
+
+        // .then(res => res.json())
         //grab the values of the book id and inputs and pass them to a post fetch to create the review in the db
     }
 
@@ -50,10 +59,16 @@ class Book {
         const form = document.createElement("form")
         //add book id as a form attribute
         form.innerHTML = `
-            
-        `// add your form input HTML here
+            <input type="hidden" value="${bookId}
+            Review: <input type="text" name="book-review-content" id="book-review-content"/><br>
+            Reviewer:<input type="text" name="book-reviewer" id="book-reviewer"/><br>            
+            <input type="submit" value="Add Review"/>
+        `
+        // add your form input HTML here
         //add form submit event handler
         //append new form to form container
+        // handFormOnSubmit(bookId)
+        formContainer.appendChild(form.innerHTML)
 
     }
 

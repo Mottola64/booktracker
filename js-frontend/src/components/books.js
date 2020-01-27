@@ -13,16 +13,13 @@ class Books {
         this.newBookGenre = document.getElementById('new-book-genre')
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
-        this.booksContainer.addEventListener('dblclick', this.handleBookClick.bind(this))
+        // this.booksContainer.addEventListener('dblclick', this.handleBookClick.bind(this))
         this.booksContainer.addEventListener('click', this.handleNewReviewClick)
+        this.bookReviewContent = document.getElementById('book-review-content')
+        this.bookReviewer = document.getElementById('book-reviewer')
     }
 
-    handleNewReviewClick(e) {
-        //does the e.target have the new-review-button class name?? only respond if it does
-        // take the book id value from the button
-        // call the render Book.renderForm function and pass it the book id
-        console.log(e.target.className)
-    }
+
     createBook(e) {
         console.log(this)
         e.preventDefault()
@@ -43,9 +40,42 @@ class Books {
 
     }
 
-    handleBookClick(e) {
-        console.log(e.target)
+    createReview(e) {
+        console.log(this)
+        e.preventDefault()
+        const review = {
+            content: this.bookReviewContent.value,
+            reviewer: this.bookReviewer.value
+        }
+
+
+        this.adapter.createReview(review)
+            .then(review => {
+            this.reviews.push(new Book(review))
+            
+            this.render()
+            })
+            .catch(err => console.log(err))
+
     }
+
+    
+    handleNewReviewClick(e) {
+
+        if (e.target.className === 'new-review-button'){
+            const str = e.target.id
+            const bookId = str.split('_')[2];
+            Book.renderNewBookReviewForm(bookId);
+
+            // console.log(bookId);
+        }
+        else
+            {console.log('error')}
+        //does the e.target have the new-review-button class name?? only respond if it does
+        // take the book id value from the button
+        // call the render Book.renderForm function and pass it the book id
+    }
+
     fetchAndLoadBooks() {
         this.adapter
             .getBooks()
