@@ -12,7 +12,7 @@ class Book {
             <ul>${this.reviews.map(review => {
                 return `
                    <p>${review.content}</p>
-                   <p>${review.reviewer}</p>
+                   <ul>${review.reviewer}</ul>
                 `
             }).join('')}</ul>
             `
@@ -33,43 +33,25 @@ class Book {
         return `
             <button class="new-review-button" id="new_review_${this.id}">Add Review</button>
         `
-
     }
 
-    //form submit event handler
-    handFormOnSubmit(){
-        console.log('testetetrserserse')
-        // return fetch(this.baseUrl, {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ review })
-        // })
-
-        // .then(res => res.json())
-        //grab the values of the book id and inputs and pass them to a post fetch to create the review in the db
-    }
-
-    //Book.renderNewBookReviewForm
-    static renderNewBookReviewForm(bookId){
+    static renderNewBookReviewForm(bookId) {
         //return the form html for a new book review
         //id will be used by the form submit event to identify the book the review is associated with on the back end
-        const formContainer = document.findElementById(`book-${bookId}`)
+        const formContainer = document.getElementById(`book-${bookId}`)
         const form = document.createElement("form")
+        form.setAttribute('data-book-id', bookId)
         //add book id as a form attribute
         form.innerHTML = `
-            <input type="hidden" value="${bookId}
             Review: <input type="text" name="book-review-content" id="book-review-content"/><br>
             Reviewer:<input type="text" name="book-reviewer" id="book-reviewer"/><br>            
-            <input type="submit" value="Add Review"/>
+            <input type="submit" value="Submit Review"/>
         `
         // add your form input HTML here
         //add form submit event handler
         //append new form to form container
-        // handFormOnSubmit(bookId)
-        formContainer.appendChild(form.innerHTML)
-
+        
+        formContainer.appendChild(form)
     }
 
     renderBook(){
@@ -82,7 +64,6 @@ class Book {
                 ${this.renderNewReviewButton()}
             </div>
         `
-
     }
 
 

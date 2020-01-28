@@ -1,7 +1,8 @@
 class Books {
     constructor() {
         this.books = []
-        this.adapter = new BooksAdapter()
+        this.bookAdapter = new BooksAdapter()
+        this.reviewAdapter = new ReviewsAdapter()
         this.initBindingsAndEventListeners()
         this.fetchAndLoadBooks()
     }
@@ -13,10 +14,35 @@ class Books {
         this.newBookGenre = document.getElementById('new-book-genre')
         this.bookForm = document.getElementById('new-book-form')
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
-        // this.booksContainer.addEventListener('dblclick', this.handleBookClick.bind(this))
         this.booksContainer.addEventListener('click', this.handleNewReviewClick)
-        this.bookReviewContent = document.getElementById('book-review-content')
-        this.bookReviewer = document.getElementById('book-reviewer')
+        this.booksContainer.addEventListener('submit', this.handleFormOnSubmit.bind(this))
+    }
+
+    //form submit event handler
+    handleFormOnSubmit(e){
+        e.preventDefault()
+        const review = {
+            content: event.target.querySelector('#book-review-content').value,
+            reviewer: event.target.querySelector('#book-reviewer').value,
+            book_id: event.target.getAttribute('data-book-id')
+        }
+
+        this.reviewAdapter.createReview(review)
+            .then(review => {
+
+                //you'll should then have review.book.id 
+                //google how to find object by attribute value
+                //filter or find maybe? 
+                const book = this.books.find(book => book.id === review.book.id)
+                book.reviews.push(review)
+        
+                //once you find the corresponding book, push the new review into it's reviews array
+                //rerender it all
+            
+            this.render()
+            })
+            .catch(err => console.log(err))
+        //grab the values of the book id and inputs and pass them to a post fetch to create the review in the db
     }
 
 
@@ -30,7 +56,7 @@ class Books {
         }
 
 
-        this.adapter.createBook(book)
+       this.bookAdapter.createBook(book)
             .then(book => {
             this.books.push(new Book(book))
             
@@ -40,44 +66,21 @@ class Books {
 
     }
 
-    createReview(e) {
-        console.log(this)
-        e.preventDefault()
-        const review = {
-            content: this.bookReviewContent.value,
-            reviewer: this.bookReviewer.value
-        }
-
-
-        this.adapter.createReview(review)
-            .then(review => {
-            this.reviews.push(new Book(review))
-            
-            this.render()
-            })
-            .catch(err => console.log(err))
-
-    }
-
-    
     handleNewReviewClick(e) {
 
         if (e.target.className === 'new-review-button'){
             const str = e.target.id
             const bookId = str.split('_')[2];
             Book.renderNewBookReviewForm(bookId);
-
-            // console.log(bookId);
         }
-        else
-            {console.log('error')}
+
         //does the e.target have the new-review-button class name?? only respond if it does
         // take the book id value from the button
         // call the render Book.renderForm function and pass it the book id
     }
 
     fetchAndLoadBooks() {
-        this.adapter
+        this.bookAdapter
             .getBooks()
             .then(books => {
                 books.forEach(book => this.books.push(new Book(book)))

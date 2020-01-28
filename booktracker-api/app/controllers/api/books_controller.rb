@@ -17,7 +17,7 @@ class Api::BooksController < ApplicationController
     def create
         @book = Book.create(book_params)
 
-        render json: @book, status: 200
+        render json: @book, include: [:reviews], status: 200
     end
 
     def update

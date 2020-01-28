@@ -13,7 +13,8 @@ class Api::ReviewsController < ApplicationController
     end    
 
     def create
-        @review = Review.new(review_params)
+        @review = Review.create(review_params)
+        render json: @review, include: [:book], status: 200
     end
 
     def destroy
@@ -25,7 +26,7 @@ class Api::ReviewsController < ApplicationController
 
     private
     def review_params
-        params.require(:review).permit(:content, :reviewer)
+        params.require(:review).permit(:content, :reviewer, :book_id)
     end
 
 
