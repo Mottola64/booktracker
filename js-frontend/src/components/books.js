@@ -1,4 +1,6 @@
 class Books {
+    static allBooks = []
+
     constructor() {
         this.books = []
         this.bookAdapter = new BooksAdapter()
@@ -6,6 +8,8 @@ class Books {
         this.initBindingsAndEventListeners()
         this.fetchAndLoadBooks()
     }
+
+    
 
     initBindingsAndEventListeners() {
         this.booksContainer = document.getElementById('books-container')
@@ -16,8 +20,39 @@ class Books {
         this.bookForm.addEventListener('submit', this.createBook.bind(this))
         this.booksContainer.addEventListener('click', this.handleNewReviewClick)
         this.booksContainer.addEventListener('submit', this.handleFormOnSubmit.bind(this))
+        this.nameButtonSort = document.getElementById('name-button')
+        this.nameButtonSort.addEventListener('click', this.sortBooks.bind(this))
     }
 
+    compare(a, b) {
+        
+        const titleA = a.title.toUpperCase();
+        const titleB = b.title.toUpperCase();
+
+        let comparison = 0;
+        if (titleA > titleB) {
+            comparison = 1;
+        } else if (titleA < titleB) {
+            comparison = -1;
+        }
+        return comparison;
+    }
+           
+    static allBooks() {
+        return allBooks
+    }
+
+
+    sortBooks() {
+        const sortedBooks = this.books.sort(this.compare);
+        this.renderSortedBooks(sortedBooks)
+    }
+
+    renderSortedBooks(sortedBooks) {
+        this.booksContainer.innerHTML=""
+        this.booksContainer.innerHTML = sortedBooks.map(book =>book.renderBook()).join('')
+    }
+    
     //form submit event handler
     handleFormOnSubmit(e){
         e.preventDefault()
@@ -30,19 +65,13 @@ class Books {
         this.reviewAdapter.createReview(review)
             .then(review => {
 
-                //you'll should then have review.book.id 
-                //google how to find object by attribute value
-                //filter or find maybe? 
                 const book = this.books.find(book => book.id === review.book.id)
                 book.reviews.push(review)
-        
-                //once you find the corresponding book, push the new review into it's reviews array
-                //rerender it all
+       
             
             this.render()
             })
             .catch(err => console.log(err))
-        //grab the values of the book id and inputs and pass them to a post fetch to create the review in the db
     }
 
 
@@ -58,8 +87,9 @@ class Books {
 
        this.bookAdapter.createBook(book)
             .then(book => {
-            this.books.push(new Book(book))
-            
+            const object = new Book(book)
+            this.books.push(object)
+            allBooks.push(object)
             this.render()
             })
             .catch(err => console.log(err))

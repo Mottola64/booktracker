@@ -3,8 +3,8 @@ class BooksAdapter {
         this.baseUrl = 'http://localhost:3000/api/books'
     }
 
-    getBooks() {
-        return fetch(this.baseUrl).then(res => res.json())
+   getBooks() {
+         return fetch(this.baseUrl).then(res => res.json())
     }
 
     createBook(book) {

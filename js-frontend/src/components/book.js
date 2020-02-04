@@ -11,8 +11,8 @@ class Book {
         return `
             <ul>${this.reviews.map(review => {
                 return `
-                   <p>${review.content}</p>
-                   <ul>${review.reviewer}</ul>
+                    <p>- ${review.content}</p>
+                    <ul>        - ${review.reviewer}</ul>
                 `
             }).join('')}</ul>
             `
@@ -36,20 +36,16 @@ class Book {
     }
 
     static renderNewBookReviewForm(bookId) {
-        //return the form html for a new book review
-        //id will be used by the form submit event to identify the book the review is associated with on the back end
         const formContainer = document.getElementById(`book-${bookId}`)
         const form = document.createElement("form")
         form.setAttribute('data-book-id', bookId)
-        //add book id as a form attribute
+
         form.innerHTML = `
             Review: <input type="text" name="book-review-content" id="book-review-content"/><br>
             Reviewer:<input type="text" name="book-reviewer" id="book-reviewer"/><br>            
             <input type="submit" value="Submit Review"/>
         `
-        // add your form input HTML here
-        //add form submit event handler
-        //append new form to form container
+
         
         formContainer.appendChild(form)
     }
