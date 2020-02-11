@@ -4,25 +4,52 @@ body {
     font-weight: 300;
     line-height: 1.6em;
     font-size: 1.3em;
+    background-color: #F1FAEE;
+  }
+
+  .input-class {
+    color:  #E63946;
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue';
+    font-weight: bold;
+    margin: auto;
+  }
+
+  .book-render {
+    border: 2px solid #457b9d;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #E63946;
+  }
+
+  h3 {
+    color: #1d3557;
+
   }
   
-  a {
-    color: #097659;
+  label {
+    display: inline-block;
+    width: 100px;
+    height: 20px;
+    text-align: left;
+    margin: auto;
   }
-  
+
   input {
-    font-size: 1.5em;
+    display: inline-block;
+    width: 200px;
+    height: 20px;
   }
   
   .container {
-    width: 960px;
+    width: 100%;
     margin: auto;
     margin-top: 50px;
+    margin-left: 10px;
   }
   
-  ul {
-    padding-left: 20px;
-  }
+ 
   
   .delete-book-link {
     color: red;
@@ -38,3 +65,9 @@ body {
     grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
   }
+
+  /* #e63946
+  #f1faee
+  #a8dadc
+  #457b9d
+  #1d3557 */

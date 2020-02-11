@@ -53,7 +53,7 @@ class Book {
     renderBook(){
         
         return `
-            <div id="book-${this.id}">
+            <div class="book-render" id="book-${this.id}">
                 ${this.renderTitle()}
                 ${this.renderLi()}
                 ${this.renderBookReviews()}

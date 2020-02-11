@@ -9,15 +9,15 @@
     <title>Booktracker</title>
 </head>
 <body>
-    <div class="container">
+    <div>
         <h1>Booktracker</h1>
         <div id="new-book-container">
-            <form id="new-book-form">
-                Title: <input type="text" name="book-title" id="new-book-title"/><br>
-                Author:<input type="text" name="book-author" id="new-book-author"/><br>
-                Genre: <input type="text" name="book-genre" id="new-book-genre"/><br>
+            <form id="new-book-form" class="input-class">
+                <label>Title:</label><input type="text" name="book-title" id="new-book-title"/><br>
+                <label>Author:</label><input type="text" name="book-author" id="new-book-author"/><br>
+                <label>Genre:</label><input type="text" name="book-genre" id="new-book-genre"/><br>
                 
-                <input type="submit" value="Submit"/>
+                <input style="width: 60px" type="submit" value="Submit"/>
             </form>
             <button type="name-button" id="name-button">Sort By Name</button>
         </div>
